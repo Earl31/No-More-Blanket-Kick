@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Fragment selected;
 
-                switch (position){
+                switch (position) {
                     case 0:
                         selected = fragment1;
                         break;
@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, selected).commit();
-
             }
 
             @Override
