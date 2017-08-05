@@ -10,26 +10,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA8_wSjQgEJgX95hzWlJoIs1kQosihO2lE"/>
+            android:value="AIzaSyA8_wSjQgEJgX95hzWlJoIs1kQosihO2lE" />
 
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".LocationRegisterActivity"
+            android:label="집 위치 등록"
+            android:theme="@style/Theme.AppCompat"></activity>
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SettingsActivity"></activity>
-
-        <activity android:name=".LocationRegisterActivity"
-            android:theme="@style/Theme.AppCompat"
-            android:label="집 위치 등록">
-        </activity>
-
     </application>
 
 </manifest>
