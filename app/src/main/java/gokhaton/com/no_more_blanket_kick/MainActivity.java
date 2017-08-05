@@ -1,18 +1,36 @@
 package gokhaton.com.no_more_blanket_kick;
 
+<<<<<<< HEAD
+=======
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+>>>>>>> 08be577c488548d1952c4fe339cb321f48cd88b8
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
 import android.widget.FrameLayout;
+=======
+import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+>>>>>>> 08be577c488548d1952c4fe339cb321f48cd88b8
 
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockMessangerFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockedFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.EmergencyCallFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.MapFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.TransportFragment;
+import gokhaton.com.no_more_blanket_kick.constant.Prefs;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ImageView setting;
 
     private TabLayout main_tab;
     private FrameLayout container;
@@ -31,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         main_tab = (TabLayout) findViewById(R.id.main_tab);
         container = (FrameLayout) findViewById(R.id.main_container);
+        setting = (ImageView) findViewById(R.id.setting_btn);
 
         fragment1 = new EmergencyCallFragment();
         fragment2 = new BlockedFragment();
@@ -40,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_container, fragment1).commit();
+
+        setting.setOnClickListener(this);
 
         main_tab.addTab(main_tab.newTab().setText("비상 연락"));
         main_tab.addTab(main_tab.newTab().setText("차단"));
@@ -92,5 +113,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if(!checkHomeLocationRegistered()){
+            showLocationAlert();
+        }
+    }
+
+
+    public boolean checkHomeLocationRegistered()
+    {
+        SharedPreferences pref = getSharedPreferences(Prefs.PREF_NAME, MODE_PRIVATE);
+        String location = pref.getString("location",null);
+
+        return location != null;
+
+    }
+
+    public boolean showLocationAlert(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                MainActivity.this);
+
+        // 제목셋팅
+        alertDialogBuilder.setTitle("위치 정보 등록");
+
+        // AlertDialog 셋팅
+        alertDialogBuilder
+                .setMessage("위치 정보가 등록되어 있지 않습니다.\n앱을 이용하기 위해서 먼저 위치를 등록해주세요")
+                .setCancelable(false)
+                .setPositiveButton("등록",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this, LocationRegisterActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                .setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                // 다이얼로그를 취소한다
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
+
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.setting_btn:
+                intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

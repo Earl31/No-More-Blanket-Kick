@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gokhaton.com.no_more_blanket_kick">
+<<<<<<< HEAD
 
     <!-- receiver를 받기 위해 intent filter를 설정  -->
     <receiver android:name=".OutgoingReceiver"></receiver>
@@ -13,6 +14,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
 
+=======
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+>>>>>>> 08be577c488548d1952c4fe339cb321f48cd88b8
 
     <application
         android:allowBackup="true"
@@ -21,7 +25,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+<<<<<<< HEAD
         <activity android:name=".MainActivity">
+=======
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA8_wSjQgEJgX95hzWlJoIs1kQosihO2lE" />
+
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".LocationRegisterActivity"
+            android:label="집 위치 등록"
+            android:theme="@style/Theme.AppCompat"></activity>
+        <activity android:name=".SplashActivity">
+>>>>>>> 08be577c488548d1952c4fe339cb321f48cd88b8
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
