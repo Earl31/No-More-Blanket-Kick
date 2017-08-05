@@ -1,11 +1,10 @@
 package gokhaton.com.no_more_blanket_kick;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockMessangerFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockedFragment;
@@ -77,7 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, selected).commit();
 
-            }
+
+
+
+
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {

@@ -20,6 +20,11 @@ public class BlockedFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.blocked_fragment,
                 container, false);
 
+
+
+
         return rootView;
     }
+
+
 }
