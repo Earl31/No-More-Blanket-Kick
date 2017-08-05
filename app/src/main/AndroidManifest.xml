@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LocationRegisterActivity">
+        <activity android:name=".LocationRegisterActivity"
+            android:theme="@style/Theme.AppCompat">
         </activity>
 
     </application>
