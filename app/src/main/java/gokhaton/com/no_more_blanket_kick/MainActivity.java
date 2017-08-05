@@ -1,25 +1,18 @@
 package gokhaton.com.no_more_blanket_kick;
 
-<<<<<<< HEAD
-=======
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
->>>>>>> 08be577c488548d1952c4fe339cb321f48cd88b8
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
-import android.widget.FrameLayout;
-=======
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
->>>>>>> 08be577c488548d1952c4fe339cb321f48cd88b8
 
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockMessangerFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockedFragment;
@@ -76,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Fragment selected;
 
-                switch (position){
+                switch (position) {
                     case 0:
                         selected = fragment1;
                         break;
@@ -96,11 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, selected).commit();
-
-
-
-
-
+            }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {

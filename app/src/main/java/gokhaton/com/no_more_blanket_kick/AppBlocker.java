@@ -3,17 +3,12 @@ package gokhaton.com.no_more_blanket_kick;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION;
 
 public class AppBlocker extends Service {
 
@@ -25,12 +20,7 @@ public class AppBlocker extends Service {
 
         super.onCreate();
         Log.d("status","OnCreate");
-        if(checkSelfPermission(this, ACTION_MANAGE_OVERLAY_PERMISSION)== PackageManager.PERMISSION_GRANTED)
-            onStartOverlay();
-        //앱이 전화 앱일 경우 -> onStartCallOverlay
-        else{
-            Toast.makeText(this, "권한이 없습니다", Toast.LENGTH_LONG).show();
-        }
+        onStartOverlay();
 
     }
 
@@ -63,7 +53,7 @@ public class AppBlocker extends Service {
 
         WindowManager.LayoutParams mParams = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT, //너비
-                WindowManager.LayoutParams.WRAP_CONTENT,  //높이
+                WindowManager.LayoutParams.MATCH_PARENT,  //높이
 
                 WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,  //종
 
@@ -85,6 +75,8 @@ public class AppBlocker extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mManager.removeView(mView);
+        mManager = null;
     }
 
     public AppBlocker() {
