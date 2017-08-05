@@ -20,7 +20,7 @@
             android:textColor="#000000"
             android:text="on/off"
             android:id="@+id/main_switch"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" />
 
         <ImageView
             android:layout_width="20dp"
