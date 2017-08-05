@@ -1,8 +1,12 @@
 package gokhaton.com.no_more_blanket_kick;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +19,7 @@ import gokhaton.com.no_more_blanket_kick.Fragment.BlockedFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.EmergencyCallFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.MapFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.TransportFragment;
+import gokhaton.com.no_more_blanket_kick.constant.Prefs;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -98,6 +103,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        if(!checkHomeLocationRegistered()){
+            showLocationAlert();
+        }
+    }
+
+
+    public boolean checkHomeLocationRegistered()
+    {
+        SharedPreferences pref = getSharedPreferences(Prefs.PREF_NAME, MODE_PRIVATE);
+        String location = pref.getString("location",null);
+
+        return location != null;
+
+    }
+
+    public boolean showLocationAlert(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                MainActivity.this);
+
+        // 제목셋팅
+        alertDialogBuilder.setTitle("위치 정보 등록");
+
+        // AlertDialog 셋팅
+        alertDialogBuilder
+                .setMessage("위치 정보가 등록되어 있지 않습니다.\n앱을 이용하기 위해서 먼저 위치를 등록해주세요")
+                .setCancelable(false)
+                .setPositiveButton("등록",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this, LocationRegisterActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                .setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                // 다이얼로그를 취소한다
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
+
+        return true;
     }
 
     @Override
