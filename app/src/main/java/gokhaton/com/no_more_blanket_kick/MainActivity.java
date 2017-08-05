@@ -1,10 +1,13 @@
 package gokhaton.com.no_more_blanket_kick;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import gokhaton.com.no_more_blanket_kick.Fragment.BlockMessangerFragment;
@@ -13,7 +16,9 @@ import gokhaton.com.no_more_blanket_kick.Fragment.EmergencyCallFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.MapFragment;
 import gokhaton.com.no_more_blanket_kick.Fragment.TransportFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ImageView setting;
 
     private TabLayout main_tab;
     private FrameLayout container;
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         main_tab = (TabLayout) findViewById(R.id.main_tab);
         container = (FrameLayout) findViewById(R.id.main_container);
+        setting = (ImageView) findViewById(R.id.setting_btn);
 
         fragment1 = new EmergencyCallFragment();
         fragment2 = new BlockedFragment();
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_container, fragment1).commit();
+
+        setting.setOnClickListener(this);
 
         main_tab.addTab(main_tab.newTab().setText("비상 연락"));
         main_tab.addTab(main_tab.newTab().setText("차단"));
@@ -90,5 +98,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.setting_btn:
+                intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
