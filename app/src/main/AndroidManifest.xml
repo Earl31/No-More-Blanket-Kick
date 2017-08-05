@@ -14,18 +14,19 @@
             android:value="AIzaSyA8_wSjQgEJgX95hzWlJoIs1kQosihO2lE" />
 
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity
             android:name=".LocationRegisterActivity"
             android:label="집 위치 등록"
             android:theme="@style/Theme.AppCompat"></activity>
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
