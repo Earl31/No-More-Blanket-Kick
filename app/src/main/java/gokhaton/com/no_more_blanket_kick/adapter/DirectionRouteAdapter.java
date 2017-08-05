@@ -1,5 +1,4 @@
 package gokhaton.com.no_more_blanket_kick.adapter;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -8,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.maps.model.DirectionsRoute;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +51,12 @@ public class DirectionRouteAdapter extends BaseAdapter {
 
         // 아이템 내 각 위젯에 데이터 반영
       //  iconImageView.setImageDrawable(listViewItem.getIcon());
-        titleTextView.setText((CharSequence) listViewItem.legs[0].duration);
+        titleTextView.setText("막차시간 : " + String.valueOf(listViewItem.legs[0].departureTime.getHourOfDay())+"시 "+String.valueOf(listViewItem.legs[0].departureTime.getMinuteOfHour())+"분");
         descTextView.setText(listViewItem.legs[0].startAddress);
 
         return convertView;
     }
+
 
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override

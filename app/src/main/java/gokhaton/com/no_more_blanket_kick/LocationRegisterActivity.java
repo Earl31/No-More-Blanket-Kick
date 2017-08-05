@@ -150,7 +150,7 @@ public class LocationRegisterActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putString("location",place.getAddress().toString());
-        editor.putString("location_lat/lang",place.getAddress().toString());
+        editor.putString("location_lat/lang",place.getLatLng().toString());
         editor.commit();
     }
 }

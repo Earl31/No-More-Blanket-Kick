@@ -25,6 +25,10 @@
             android:name=".LocationRegisterActivity"
             android:label="집 위치 등록"
             android:theme="@style/Theme.AppCompat"></activity>
+        <activity
+            android:name=".DestinationActivity"
+            android:label="막차 경로"
+            android:theme="@style/Theme.AppCompat"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
