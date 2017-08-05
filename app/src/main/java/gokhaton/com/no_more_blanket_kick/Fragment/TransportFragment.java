@@ -11,8 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.maps.DirectionsApi;
+import com.google.maps.GeoApiContext;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.TransitMode;
+import com.google.maps.model.TransitRoutingPreference;
+
+import org.joda.time.DateTime;
+
+import java.io.IOException;
+
 import gokhaton.com.no_more_blanket_kick.LocationRegisterActivity;
 import gokhaton.com.no_more_blanket_kick.R;
+import gokhaton.com.no_more_blanket_kick.constant.ApiKey;
 import gokhaton.com.no_more_blanket_kick.constant.Prefs;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -31,9 +43,46 @@ public class TransportFragment extends Fragment {
         if(!checkHomeLocationRegistered()){
             showLocationAlert();
         }
+
+        getLastTransport();
         return rootView;
     }
 
+
+    public void getLastTransport(){
+
+
+        GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey(ApiKey.GoogleMapsAPI).build();
+
+
+        DirectionsResult result =
+                null;
+
+
+
+        DateTime dt = new DateTime().withHourOfDay(16);
+        SharedPreferences pref = getActivity().getSharedPreferences(Prefs.PREF_NAME, MODE_PRIVATE);
+        String origin = pref.getString("location","");
+        String destination = "천안역";
+
+        try {
+            result = DirectionsApi.newRequest(geoApiContext)
+                    .transitMode(TransitMode.BUS, TransitMode.SUBWAY)
+                    .arrivalTime(dt)
+                    .origin(origin)
+                    .destination(destination)
+                    .transitRoutingPreference(TransitRoutingPreference.LESS_WALKING)
+                    .language("KO")
+                    .await();
+        } catch (ApiException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public boolean checkHomeLocationRegistered()
     {
