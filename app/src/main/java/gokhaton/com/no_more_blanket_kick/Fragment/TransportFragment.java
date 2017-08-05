@@ -10,20 +10,26 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.google.maps.DirectionsApi;
 import com.google.maps.GeoApiContext;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.TransitMode;
 import com.google.maps.model.TransitRoutingPreference;
+import com.google.maps.model.TravelMode;
 
 import org.joda.time.DateTime;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import gokhaton.com.no_more_blanket_kick.LocationRegisterActivity;
 import gokhaton.com.no_more_blanket_kick.R;
+import gokhaton.com.no_more_blanket_kick.adapter.DirectionRouteAdapter;
 import gokhaton.com.no_more_blanket_kick.constant.ApiKey;
 import gokhaton.com.no_more_blanket_kick.constant.Prefs;
 
@@ -34,6 +40,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class TransportFragment extends Fragment {
+    ArrayList<DirectionsRoute> directionsRouteList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +53,13 @@ public class TransportFragment extends Fragment {
         }
 
         getLastTransport();
+
+        ListView transportListView = (ListView) rootView.findViewById(R.id.transportListView);
+
+        DirectionRouteAdapter directionRouteAdapter = new DirectionRouteAdapter(directionsRouteList);
+
+        transportListView.setAdapter(directionRouteAdapter);
+
         return rootView;
     }
 
@@ -60,13 +75,15 @@ public class TransportFragment extends Fragment {
 
 
 
-        DateTime dt = new DateTime().withHourOfDay(16);
+        DateTime dt = new DateTime().withHourOfDay(4);
         SharedPreferences pref = getActivity().getSharedPreferences(Prefs.PREF_NAME, MODE_PRIVATE);
-        String origin = pref.getString("location","");
-        String destination = "천안역";
+        String origin = "강남역";//pref.getString("location","");
+        String destination = "안암역";
+
 
         try {
             result = DirectionsApi.newRequest(geoApiContext)
+                    .mode(TravelMode.TRANSIT)
                     .transitMode(TransitMode.BUS, TransitMode.SUBWAY)
                     .arrivalTime(dt)
                     .origin(origin)
@@ -74,6 +91,8 @@ public class TransportFragment extends Fragment {
                     .transitRoutingPreference(TransitRoutingPreference.LESS_WALKING)
                     .language("KO")
                     .await();
+
+            directionsRouteList = new ArrayList<>(Arrays.asList(result.routes));
         } catch (ApiException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -81,6 +100,7 @@ public class TransportFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
