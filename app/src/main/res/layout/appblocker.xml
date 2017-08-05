@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="#DD000000"
-    android:orientation="vertical"
     android:layout_gravity="bottom"
-    >
+    android:background="#AA000000"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:layout_weight="1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             android:layout_weight="1"
             android:text="잠깐"
             android:textAlignment="center"
+            android:textColor="#FF0000"
             android:textSize="36sp" />
     </LinearLayout>
 
@@ -34,6 +36,8 @@
             android:layout_weight="1"
             android:text="당신은 지금 취했어요"
             android:textAlignment="center"
+            android:textColor="#FF0000"
             android:textSize="30sp" />
+
     </LinearLayout>
 </LinearLayout>

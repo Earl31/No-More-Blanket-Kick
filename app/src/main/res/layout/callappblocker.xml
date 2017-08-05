@@ -18,6 +18,7 @@
             android:layout_weight="1"
             android:text="잠깐"
             android:textAlignment="center"
+            android:textColor="#FF0000"
             android:textSize="36sp" />
     </LinearLayout>
 
@@ -33,6 +34,7 @@
             android:layout_weight="1"
             android:text="누구한테 전화하려고?"
             android:textAlignment="center"
+            android:textColor="#FF0000"
             android:textSize="24sp" />
 
     </LinearLayout>
