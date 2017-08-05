@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean checkHomeLocationRegistered()
     {
         SharedPreferences pref = getSharedPreferences(Prefs.PREF_NAME, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
         String location = pref.getString("location",null);
 
         return location != null;
@@ -119,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
         // AlertDialog 셋팅
         alertDialogBuilder
-                .setMessage("위치 정보가 등록되어 있지 않습니다.\n 앱을 이용하기 위해서 먼저 위치를 등록해주세요")
+                .setMessage("위치 정보가 등록되어 있지 않습니다.\n앱을 이용하기 위해서 먼저 위치를 등록해주세요")
                 .setCancelable(false)
                 .setPositiveButton("등록",
                         new DialogInterface.OnClickListener() {

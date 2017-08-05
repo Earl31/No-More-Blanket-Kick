@@ -7,4 +7,33 @@
     android:layout_height="match_parent"
     tools:context="gokhaton.com.no_more_blanket_kick.MainActivity"
     android:background="#ffffff">
+
+    <Button
+        android:id="@+id/open_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="위치 검색" />
+
+    <TextView
+        android:id="@+id/place_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/open_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="선택 지역"
+        android:textColor="@android:color/black"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/place_attribution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/place_details"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="선택 지역"
+        android:textColor="@android:color/black" />
 </RelativeLayout>
