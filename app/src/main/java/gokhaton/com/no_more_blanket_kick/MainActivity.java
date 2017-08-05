@@ -1,69 +1,94 @@
 package gokhaton.com.no_more_blanket_kick;
 
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-import gokhaton.com.no_more_blanket_kick.constant.Prefs;
+import gokhaton.com.no_more_blanket_kick.Fragment.BlockMessangerFragment;
+import gokhaton.com.no_more_blanket_kick.Fragment.BlockedFragment;
+import gokhaton.com.no_more_blanket_kick.Fragment.EmergencyCallFragment;
+import gokhaton.com.no_more_blanket_kick.Fragment.MapFragment;
+import gokhaton.com.no_more_blanket_kick.Fragment.TransportFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TabLayout main_tab;
+    private FrameLayout container;
+
+    private Fragment fragment1;
+    private Fragment fragment2;
+    private Fragment fragment3;
+    private Fragment fragment4;
+    private Fragment fragment5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(checkHomeLocationRegistered()){
 
-        }
+        main_tab = (TabLayout) findViewById(R.id.main_tab);
+        container = (FrameLayout) findViewById(R.id.main_container);
 
-    }
+        fragment1 = new EmergencyCallFragment();
+        fragment2 = new BlockedFragment();
+        fragment3 = new MapFragment();
+        fragment4 = new TransportFragment();
+        fragment5 = new BlockMessangerFragment();
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_container, fragment1).commit();
 
-    public boolean checkHomeLocationRegistered()
-    {
-        SharedPreferences pref = getSharedPreferences(Prefs.PREF_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        String location = pref.getString("location",null);
+        main_tab.addTab(main_tab.newTab().setText("비상 연락"));
+        main_tab.addTab(main_tab.newTab().setText("차단"));
+        main_tab.addTab(main_tab.newTab().setText("위치 등록"));
+        main_tab.addTab(main_tab.newTab().setText("막차 계산"));
+        main_tab.addTab(main_tab.newTab().setText("앱 차단"));
 
-        if(location == null){
-            return false;
-        }
-        return true;
-    }
-    public boolean showLocationAlert(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this.context);
+        main_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
 
-        // 제목셋팅
-        alertDialogBuilder.setTitle("프로그램 종료");
+                int position = tab.getPosition();
 
-        // AlertDialog 셋팅
-        alertDialogBuilder
-                .setMessage("프로그램을 종료할 것입니까?")
-                .setCancelable(false)
-                .setPositiveButton("종료",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(
-                                    DialogInterface dialog, int id) {
-                                // 프로그램을 종료한다
-                                AlertDialogActivity.this.finish();
-                            }
-                        })
-                .setNegativeButton("취소",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(
-                                    DialogInterface dialog, int id) {
-                                // 다이얼로그를 취소한다
-                                dialog.cancel();
-                            }
-                        });
+                Fragment selected;
 
-        // 다이얼로그 생성
-        AlertDialog alertDialog = alertDialogBuilder.create();
+                switch (position){
+                    case 0:
+                        selected = fragment1;
+                        break;
+                    case 1:
+                        selected = fragment2;
+                        break;
+                    case 2:
+                        selected = fragment3;
+                        break;
+                    case 3:
+                        selected = fragment4;
+                        break;
+                    default:
+                        selected = fragment5;
+                        break;
+                }
 
-        // 다이얼로그 보여주기
-        alertDialog.show();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_container, selected).commit();
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 }
